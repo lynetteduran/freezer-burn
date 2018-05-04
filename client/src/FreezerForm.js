@@ -1,8 +1,8 @@
 import React from 'react';
-import Proptypes from 'prop-types';
+import PropTypes from 'prop-types';
 
 const FreezerForm = props => (
-  <form onSubmit= {prop.submitFreezer}>
+  <form onSubmit= {props.submitFreezer}>
     <input type= "text" name= "freezer-num" placeholder= "freezer number" value= {props.freezerNum} onChange= {props.handleChangeText} />
 
     <input type= "text" name= "freezer-location" placeholder= "freezer location" value= {props.freezerLoc}
