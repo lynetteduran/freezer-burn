@@ -1,5 +1,4 @@
-<<<<<<< Updated upstream
-=======
+
 const data = [
   {_id: 1, freezerNum: '1', freezerLoc: 'Main Room', updatedAt: new Date(), createdAt: new Date()},
 
@@ -7,4 +6,3 @@ const data = [
 ];
 
 export default data;
->>>>>>> Stashed changes

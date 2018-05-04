@@ -1,11 +1,10 @@
-<<<<<<< Updated upstream
-=======
 import React from 'react';
 import PropTypes from 'prop-types';
 import Freezer from './Freezer';
 
 const FreezerList = (props) => {
   const freezerNodes = props.data.map(freezer => (
+
     <Freezer freezerNum = {freezer.freezerNum} freezerLoc = {freezer.freezerLoc} key= {freezer._id} id= {freezer._id}>
       {freezer.text}
     </Freezer>
@@ -34,4 +33,3 @@ FreezerList.defaultProps = {
 }
 
 export default FreezerList;
->>>>>>> Stashed changes
