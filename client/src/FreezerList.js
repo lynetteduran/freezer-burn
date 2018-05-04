@@ -1,5 +1,3 @@
-<<<<<<< Updated upstream
-=======
 import React from 'react';
 import PropTypes from 'prop-types';
 import Freezer from './Freezer';
@@ -34,4 +32,3 @@ FreezerList.defaultProps = {
 }
 
 export default FreezerList;
->>>>>>> Stashed changes
