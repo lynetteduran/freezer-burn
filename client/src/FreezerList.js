@@ -4,9 +4,9 @@ import Freezer from './Freezer';
 
 const FreezerList = (props) => {
   const freezerNodes = props.data.map(freezer => (
-    <Freezer number= {freezer.freezerNum} key= {freezer._id} id= {freezer._id}>
-      {freezer.freezerNum}
-      {freezer.freezerLoc}
+
+    <Freezer freezerNum = {freezer.freezerNum} freezerLoc = {freezer.freezerLoc} key= {freezer._id} id= {freezer._id}>
+      {freezer.text}
     </Freezer>
   ));
 
@@ -22,13 +22,14 @@ const FreezerList = (props) => {
 FreezerList.propTypes = {
   data: PropTypes.arrayOf(PropTypes.shape({
     freezerNum: PropTypes.string,
-    id: PropTypes.string,
     freezerLoc: PropTypes.string,
+    id: PropTypes.string,
+    text: PropTypes.string,
   })),
 }
 
 FreezerList.defaultProps = {
   data: [],
-};
+}
 
 export default FreezerList;

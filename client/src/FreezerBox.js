@@ -13,7 +13,7 @@ class FreezerBox extends Component {
     return (
       <div className="container">
         <div className="freezers">
-          <h2>Freezers:<h2>
+          <h2>Freezers:</h2>
           <FreezerList data={DATA} />
         </div>
         <div className="form">
