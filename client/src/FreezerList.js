@@ -4,6 +4,7 @@ import Freezer from './Freezer';
 
 const FreezerList = (props) => {
   const freezerNodes = props.data.map(freezer => (
+
     <Freezer freezerNum = {freezer.freezerNum} freezerLoc = {freezer.freezerLoc} key= {freezer._id} id= {freezer._id}>
       {freezer.text}
     </Freezer>
