@@ -1,5 +1,3 @@
-<<<<<<< Updated upstream
-=======
 import React, { Component } from 'react';
 import FreezerList from './FreezerList';
 import FreezerForm from './FreezerForm';
@@ -27,4 +25,3 @@ class FreezerBox extends Component {
 }
 
 export default FreezerBox;
->>>>>>> Stashed changes
