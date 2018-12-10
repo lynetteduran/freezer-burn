@@ -1,6 +1,6 @@
 /*IMPORT DEPENDENCIES*/
 import express from 'express';
-import bodyParse from 'body-parser';
+import bodyParser from 'body-parser';
 import logger from 'morgan';
 import mongoose from 'mongoose';
 
@@ -12,7 +12,7 @@ const API_PORT = process.env.API_PORT || 3000;
 /*SETS DEPENDENCIES FOR APP INSTANCES*/
 app.use(bodyParser.urlencoded({ extended: false} ));
 app.use(bodyParser.json());
-app.(logger('dev'));
+app.use(logger('dev'));
 
 /*SETS HOMEPAGE AND API*/
 router.get('/', (req,res) => {
@@ -21,4 +21,4 @@ router.get('/', (req,res) => {
 app.use('/api', router);
 
 /*SETS PORT LISTENER*/
-app.listen(API_PORT, () => console.log('I can hear you breath...on port ${API_PORT}'));
+app.listen(API_PORT, () => console.log(`I can hear you breath...on port ${API_PORT}`));
