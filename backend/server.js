@@ -3,6 +3,7 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import logger from 'morgan';
 import mongoose from 'mongoose';
+import mongodb from 'mongodb';
 import { getSecret } from './secrets';
 import Freezer from './models/freezer';
 
@@ -26,6 +27,14 @@ router.get('/', (req,res) => {
   res.json({ message: 'Hello, world!'})
 });
 app.use('/api', router);
+
+/*SETS GET FREEZER REQ ROUTE*/
+router.get('/freezers', (req, res) => {
+  Freezer.find((err, freezers) => {
+    if (err) return res.json({ success: false, error: err});
+    return res.json({ success: true, data: freezers });
+  });
+});
 
 /*SETS PORT LISTENER*/
 app.listen(API_PORT, () => console.log(`I can hear you breath...on port ${API_PORT}`));

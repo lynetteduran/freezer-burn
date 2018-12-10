@@ -6,4 +6,4 @@ const FreezersSchema = new Schema({
   freezerLoc: String,
 }, { timestamps: true});
 
-export default mongoose.model('Freezer', FreezerSchema);
+export default mongoose.model('Freezer', FreezersSchema);
