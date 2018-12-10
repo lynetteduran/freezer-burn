@@ -13,7 +13,7 @@ const router = express.Router();
 const API_PORT = process.env.API_PORT || 3000;
 
 /* DB CONFIG - SETS URI FROM MLAB IN secrets.js*/
-mongoose.connect(getSecret('dbUri'));
+mongoose.connect(getSecret('dbUri'), { useNewUrlParser: true });
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
@@ -33,6 +33,24 @@ router.get('/freezers', (req, res) => {
   Freezer.find((err, freezers) => {
     if (err) return res.json({ success: false, error: err});
     return res.json({ success: true, data: freezers });
+  });
+});
+
+/*SETS POST FREEZER REQ ROUTE*/
+router.post('/freezers', (req, res) => {
+  const freezer = new Freezer();
+  const { freezerNum, freezerLoc } = req.body;
+  if (!freezerNum || !freezerLoc) {
+    return res.json({
+      success: false,
+      error: 'You must provide a freezer number and freezer location'
+    });
+  }
+  freezer.freezerNum = freezerNum;
+  freezer.freezerLoc = freezerLoc;
+  freezer.save(err => {
+    if (err) return res.json({ success: false, error: err});
+    return res.json({success: true});
   });
 });
 
