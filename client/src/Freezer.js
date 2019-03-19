@@ -13,8 +13,9 @@ const Freezer = props => (
         <ReactMarkdown source= {props.children} />
       </div>
       <div className= "singleFreezerButtons">
-        a onClick={() => { props.handleUpdateFreezer(props.id) }}>update</a>
-        a onClick={() => {props.handleDeleteFreezer(props.id) }}>delete</a>
+        <span className="time">{moment(props.timestamp).fromNow()}</span>
+        <a onClick={() => { props.handleUpdateFreezer(props.id) }}>update</a>
+        <a onClick={() => {props.handleDeleteFreezer(props.id) }}>delete</a>
       </div>
     </div>
   </div>
