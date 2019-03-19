@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ReactMarkdown from 'react-markdown';
+import moment from 'moment';
 
 const Freezer = props => (
   <div className= "singleFreezer">
@@ -12,16 +13,20 @@ const Freezer = props => (
         <ReactMarkdown source= {props.children} />
       </div>
       <div className= "singleFreezerButtons">
+        a onClick={() => { props.handleUpdateFreezer(props.id) }}>update</a>
+        a onClick={() => {props.handleDeleteFreezer(props.id) }}>delete</a>
       </div>
     </div>
   </div>
 );
 
 Freezer.propTypes = {
-  freezerNum: PropTypes.string.isRequired,
+  freezerNum: PropTypes.number.isRequired,
   freezerLoc: PropTypes.string.isRequired,
   children: PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired,
   timestamp: PropTypes.string.isRequired,
+  handleUpdateFreezer: PropTypes.func.isRequired,
 }
 
 export default Freezer;
