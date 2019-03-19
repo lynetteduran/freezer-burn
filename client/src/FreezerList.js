@@ -10,7 +10,8 @@ const FreezerList = (props) => {
       freezerLoc = {freezer.freezerLoc}
       key= {freezer._id}
       id= {freezer._id}>
-      {freezer.text}
+      timestamp={freezer.updatedAt}
+
     </Freezer>
   ));
 
@@ -25,7 +26,7 @@ const FreezerList = (props) => {
 /*What does shape() do*/
 FreezerList.propTypes = {
   data: PropTypes.arrayOf(PropTypes.shape({
-    freezerNum: PropTypes.string,
+    freezerNum: PropTypes.number,
     freezerLoc: PropTypes.string,
     id: PropTypes.string,
     text: PropTypes.string,

@@ -54,7 +54,7 @@ class FreezerBox extends Component {
       body: JSON.stringify({ freezerNum, freezerLoc }),
     }).then(res => res.json()).then((res) => {
       if (!res.success) this.setState({ error: res.error.message || res.error});
-      else this.setState({ freezerNum: '', text: '', error: null });
+      else this.setState({ freezerNum: '', freezerLoc: '', error: null });
     });
   }
 
