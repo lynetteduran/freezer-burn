@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 const FreezerForm = props => (
   <form onSubmit= {props.submitFreezer}>
     <input
-      type= "text"
+      type= "number"
       name= "freezer-num"
       placeholder= "freezer number"
       value= {props.freezerNum}
@@ -12,7 +12,7 @@ const FreezerForm = props => (
 
     <input
       type= "text"
-      name= "freezer-location" 
+      name= "freezer-location"
       placeholder= "freezer location"
       value= {props.freezerLoc}
       onChange={props.handleTextChange}/>
