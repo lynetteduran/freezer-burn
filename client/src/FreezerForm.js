@@ -3,10 +3,19 @@ import PropTypes from 'prop-types';
 
 const FreezerForm = props => (
   <form onSubmit= {props.submitFreezer}>
-    <input type= "text" name= "freezer-num" placeholder= "freezer number" value= {props.freezerNum} onChange= {props.handleChangeText} />
+    <input
+      type= "text"
+      name= "freezer-num"
+      placeholder= "freezer number"
+      value= {props.freezerNum}
+      onChange= {props.handleChangeText} />
 
-    <input type= "text" name= "freezer-location" placeholder= "freezer location" value= {props.freezerLoc}
-    onChange={props.handleTextChange}/>
+    <input
+      type= "text"
+      name= "freezer-location" 
+      placeholder= "freezer location"
+      value= {props.freezerLoc}
+      onChange={props.handleTextChange}/>
 
     <button type= "submit">Submit</button>
   </form>
