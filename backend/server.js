@@ -72,7 +72,7 @@ router.put('/freezers/:freezerId', (req, res) => {
   });
 });
 
-/*SETS PUT FREEZER REQ ROUTE*/
+/*SETS DELETE FREEZER REQ ROUTE*/
 router.delete('/freezers/:freezerId', (req, res) => {
   const { freezerId } = req.params;
   if (!freezerId) {
