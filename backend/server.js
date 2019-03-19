@@ -72,5 +72,17 @@ router.put('/freezers/:freezerId', (req, res) => {
   });
 });
 
+/*SETS PUT FREEZER REQ ROUTE*/
+router.delete('/freezers/:freezerId', (req, res) => {
+  const { freezerId } = req.params;
+  if (!freezerId) {
+    return res.json({ success: false, error: 'No freezer id provided' });
+  }
+  Freezer.remove({ _id: freezerId }, (error, freezer) => {
+    if (error) return res.json({ success: false, error: 'freezer no longer exists' });
+    return res.json({ success: true });
+  });
+});
+
 /*SETS PORT LISTENER*/
 app.listen(API_PORT, () => console.log(`I can hear you breath...on port ${API_PORT}`));
