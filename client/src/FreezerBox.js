@@ -38,6 +38,26 @@ class FreezerBox extends Component {
       });
   }
 
+  onChangeText = (e) => {
+    const newState = {...this.state};
+    newState[e.target.name] = e.target.value;
+    this.setState(newState);
+  }
+
+  submitFreezer = (e) => {
+    e.preventDefault();
+    const { freezerNum, freezerLoc } = this.state;
+    if(!freezerNum || !freezerLoc) return;
+    fetch('/api/freezers', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json'},
+      body: JSON.stringify({ freezerNum, freezerLoc }),
+    }).then(res => res.json()).then((res) => {
+      if (!res.success) this.setState({ error: res.error.message || res.error});
+      else this.setState({ freezerNum: '', text: '', error: null });
+    });
+  }
+
   render() {
     return (
       <div className="container">
@@ -48,7 +68,9 @@ class FreezerBox extends Component {
         <div className="form">
           <FreezerForm
             freezerNum={this.state.freezerNum}
-            freezerLoc={this.state.freezerLoc}/>
+            freezerLoc={this.state.freezerLoc}
+            handleChangeText={this.onChangeText}
+            handleSubmit={this.submitFreezer}/>
         </div>
         {this.state.error && <p>{this.state.error}</p>}
       </div>
