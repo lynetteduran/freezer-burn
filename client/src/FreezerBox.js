@@ -46,11 +46,31 @@ class FreezerBox extends Component {
 
   submitFreezer = (e) => {
     e.preventDefault();
-    const { freezerNum, freezerLoc } = this.state;
+    const { freezerNum, freezerLoc, updateId } = this.state;
     if(!freezerNum || !freezerLoc) return;
+    if (updateId) {
+      this.submitUpdatedFreezer();
+    } else {
+      this.submitNewFreezer();
+    }
+  }
+
+  submitNewFreezer = () => {
+    const { freezerNum, freezerLoc } = this.state;
+    const data = [
+      ...this.state.data,
+      {
+        freezerNum,
+        freezerLoc,
+        _id: Date.now().toString(),
+        updatedAt: new Date(),
+        createdAt: new Date()
+      },
+    ];
+    this.setState({ data });
     fetch('/api/freezers', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json'},
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ freezerNum, freezerLoc }),
     }).then(res => res.json()).then((res) => {
       if (!res.success) this.setState({ error: res.error.message || res.error});
@@ -58,12 +78,51 @@ class FreezerBox extends Component {
     });
   }
 
+  submitUpdatedFreezer = () => {
+    const { freezerNum, freezerLoc, updateId } = this.state;
+    fetch('/api/freezers/${updateId}', {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+    }).then(res => res.json()).then((res) => {
+      if (!res.success) this.setState({ error: res.error.message || res.error });
+      else this.setState({ freezerNum: '', freezerLoc: '', updateId: null });
+    });
+  }
+
+  onUpdateFreezer = (id) => {
+    const oldFreezer = this.state.data.find(c => c._id === id);
+    if (!oldFreezer) return;
+    this.setState({
+      freezerNum: oldFreezer.freezerNum,
+      freezerLoc: oldFreezer.freezerLoc,
+      updateId: id
+    });
+  }
+
+  onDeleteFreezer = (id) => {
+    const i = this.state.data.findIndex(c => c._id === id);
+    const data = [
+      ...this.state.data.slice(0, i),
+      ...this.state.data.slice(i + 1),
+    ];
+    this.setState({ data });
+    fetch('api/freezers/${id}', { method: 'DELETE' })
+      .then(res => res.json())
+      .then((res) => {
+        if (!res.success) this.setState({ error: res.error });
+      });
+  }
+
   render() {
     return (
       <div className="container">
         <div className="freezers">
           <h2>Freezers:</h2>
-          <FreezerList data={this.state.data} />
+          <FreezerList
+            data={this.state.data}
+            handleDeleteFreezer={this.onDeleteFreezer}
+            handleUpdateFreezer={this.onUpdateFreezer}
+          />
         </div>
         <div className="form">
           <FreezerForm
