@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import 'whatwg-fetch';
 import FreezerList from './FreezerList';
 import FreezerForm from './FreezerForm';
-import DATA from './data';
+//import DATA from './data';
 import './FreezerBox.css';
 
 class FreezerBox extends Component {
@@ -14,6 +14,7 @@ class FreezerBox extends Component {
       freezerNum: '',
       freezerLoc: ''
     };
+    this.pollInterval = null;
   }
 
   componentDidMount() {
@@ -33,6 +34,7 @@ class FreezerBox extends Component {
       .then(data => data.json())
       .then((res) => {
         if (!res.success) this.setState({error: res.error});
+        else this.setState({data: res.data});
       });
   }
 
