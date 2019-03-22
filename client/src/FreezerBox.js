@@ -12,7 +12,8 @@ class FreezerBox extends Component {
       data: [],
       error: null,
       freezerNum: '',
-      freezerLoc: ''
+      freezerLoc: '',
+      updateId: null,
     };
     this.pollInterval = null;
   }
@@ -33,13 +34,13 @@ class FreezerBox extends Component {
     fetch('/api/freezers/')
       .then(data => data.json())
       .then((res) => {
-        if (!res.success) this.setState({error: res.error});
-        else this.setState({data: res.data});
+        if (!res.success) this.setState({ error: res.error });
+        else this.setState({ data: res.data });
       });
   }
 
   onChangeText = (e) => {
-    const newState = {...this.state};
+    const newState = { ...this.state };
     newState[e.target.name] = e.target.value;
     this.setState(newState);
   }
@@ -63,9 +64,8 @@ class FreezerBox extends Component {
         freezerNum,
         freezerLoc,
         _id: Date.now().toString(),
-        updatedAt: new Date(),
         createdAt: new Date()
-      },
+      }
     ];
     this.setState({ data });
     fetch('/api/freezers', {
@@ -73,7 +73,7 @@ class FreezerBox extends Component {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ freezerNum, freezerLoc }),
     }).then(res => res.json()).then((res) => {
-      if (!res.success) this.setState({ error: res.error.message || res.error});
+      if (!res.success) this.setState({ error: res.error.message || res.error });
       else this.setState({ freezerNum: '', freezerLoc: '', error: null });
     });
   }
@@ -83,6 +83,7 @@ class FreezerBox extends Component {
     fetch('/api/freezers/${updateId}', {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ freezerNum, freezerLoc, updateId }),
     }).then(res => res.json()).then((res) => {
       if (!res.success) this.setState({ error: res.error.message || res.error });
       else this.setState({ freezerNum: '', freezerLoc: '', updateId: null });
@@ -106,7 +107,7 @@ class FreezerBox extends Component {
       ...this.state.data.slice(i + 1),
     ];
     this.setState({ data });
-    fetch('api/freezers/${id}', { method: 'DELETE' })
+    fetch('/api/freezers/${id}', { method: 'DELETE' })
       .then(res => res.json())
       .then((res) => {
         if (!res.success) this.setState({ error: res.error });
